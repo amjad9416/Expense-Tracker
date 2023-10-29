@@ -1,0 +1,31 @@
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+
+    <title>Insert expenses</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+          crossorigin="anonymous">
+</head>
+<body>
+<div class="container">
+<h1>
+    Add Expenses
+</h1>
+    <hr/>
+
+    <form  th:action="@{/register}" th:object="${expense}"  method="POST">
+
+        Name:<input type="text" th:field="*{name}"  name="expname" class="form-control col-4 mb-4"/><br/>
+        Purchased At:<input type="date"   th:field="*{date}" name="expcre" class="form-control col-4 mb-4"/><br/>
+        Amount:<input type="number"    th:field="*{amount}"   name="expamount" class="form-control col-4 mb-4"/><br/>
+        Description:<input type="text"    th:field="*{note}"  name="expdesc" class="form-control col-4 mb-4"/><br/>
+
+        <input type="submit" name="Submit" value="Submit" class="btn btn-primary"/>
+        <input type="hidden" th:field="*{Expenseid}">
+    </form>
+    <hr/>
+    <a th:href="@{/expense}">Back to List</a>
+
+</div>
+</body>
+</html>

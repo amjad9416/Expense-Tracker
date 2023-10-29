@@ -1,0 +1,83 @@
+<html xmlns="http:thymeleaf.org" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+
+    <title>Display expenses</title>
+    <link href="https://cdn.datatables.net/v/bs4/dt-1.13.6/datatables.min.css"
+          type="text/css"
+          rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+          crossorigin="anonymous">
+</head>
+<body>
+
+<div class="container">
+    <h1>
+        Expense Tracker
+    </h1>
+    <hr/>
+
+    <p class="display-4">
+        You are Viewing <b><span th:text="${totalExpenses}"></span></b> expenses totaling of <b>$<span th:text="${totalAmount}"></span></b>
+    </p>
+
+<a th:href="@{/expense/senddata}"   class="btn btn-primary mb-2"> Add Expenses</a>
+
+<table class="table table-bordered table-striped" id="expense-table">
+    <thead>
+    <tr>
+
+        <th scope="col">Name</th>
+        <th scope="col">created at</th>
+        <th scope="col">Amount</th>
+        <th scope="col">Description</th>
+        <th scope="col">Actions</th>
+
+    </tr>
+    </thead>
+    <tbody>
+
+
+
+        <tr th:each="expense:${expenses}">
+
+            <td th:text="${expense.name}"></td>
+            <td th:text="${expense.date}"></td>
+            <td th:text="${expense.amount}"></td>
+            <td th:text="${expense.note}"></td>
+            <td>
+                <a th:href="@{/showupdate(expenseid=${expense.Expenseid})}" class="btn btn-info">Edit</a>
+                <a th:href="@{/deleteexpense(expenseid=${expense.Expenseid})}" class="btn btn-danger ml-2">Delete</a>
+            </td>
+
+
+        </tr>
+
+    </tbody>
+
+</table>
+
+
+
+
+</div>
+
+
+<script    type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<script  type="text/javascript"    src="https://cdn.datatables.net/v/bs4/dt-1.13.6/datatables.min.js"></script>
+<script>
+
+    $(document).ready(function() {
+    $("#expense-table").DataTable({
+    'aoColumnDefs':[{
+    'bSortable' : false,
+    'aTargets' : [-1]
+    }]
+
+    });
+
+    })
+</script>
+</body>
+
+</html>
